@@ -100,9 +100,12 @@ const ProfileSchema = new mongoose.Schema({
     instagram: {
       type: String,
     },
+    linkdin:{
+      type:String
+    }
   },
   date: {
-    Type: Date,
+    type: Date,
     default: Date.now,
   },
 });
