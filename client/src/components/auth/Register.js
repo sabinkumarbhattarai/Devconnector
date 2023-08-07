@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 import { setAlert } from "../../actions/alert";
+import {register } from "../../actions/auth"
 import PropTypes from "prop-types";
-import { register } from "../../actions/auth";
 
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert,register }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,7 +22,7 @@ const Register = ({ setAlert, register }) => {
     e.preventDefault();
     if (password !== password2) {
       // console.log("Password dont matched");
-      setAlert("Password dont matched", "danger");
+      setAlert("Password do not matched", "danger");
     } else {
       register({ name, email, password });
       // console.log("Success");
@@ -107,4 +107,4 @@ Register.propTypes = {
   register: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert, register })(Register);
+export default connect(null, { setAlert,register })(Register);

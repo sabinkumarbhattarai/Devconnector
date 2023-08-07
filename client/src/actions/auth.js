@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAlert } from "./alert";
-import { REGISTER_SUCCESS, REGISTER_FAIL } from "./type";
+import { REGISTER_SUCCESS, REGISTER_FAIL } from "./types";
 
 //Register user
 export const register =
@@ -13,7 +13,7 @@ export const register =
     };
     const body = JSON.stringify({ name, email, password });
     try {
-      const res = await axios.post("http://localhost:3005/api/v1/users", body, config);
+      const res = await axios.post("/api/users", body, config);
 
       dispatch({
         type: REGISTER_SUCCESS,
