@@ -21,28 +21,9 @@ const Register = ({ setAlert,register }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      // console.log("Password dont matched");
       setAlert("Password do not matched", "danger");
     } else {
       register({ name, email, password });
-      // console.log("Success");
-      // const newUser = {
-      //   name,
-      //   email,
-      //   password,
-      // };
-      // try {
-      //   const config = {
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //   };
-      //   const body = JSON.stringify(newUser);
-      //   const res = await axios.post("api/users", body, config);
-      //   console.log(res.data);
-      // } catch (err) {
-      //   console.error(err.response.data);
-      // }
     }
   };
 
