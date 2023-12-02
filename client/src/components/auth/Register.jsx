@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { Link, useNavigate } from "react-router-dom";
 
+import PropTypes from "prop-types";
 import { setAlert } from "../../store/alert/alert.action";
 import { register } from "../../store/auth/auth.action";
 import Alert from "../layout/Alert";
 
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -30,6 +32,10 @@ const Register = ({ setAlert, register }) => {
     }
   };
 
+  if (isAuthenticated) {
+    return navigate("/dashboard");
+  }
+
   return (
     <section className="container">
       <Alert />
@@ -45,7 +51,6 @@ const Register = ({ setAlert, register }) => {
             name="name"
             value={name}
             onChange={handleChange}
-            required
           />
         </div>
         <div className="form-group">
@@ -66,7 +71,6 @@ const Register = ({ setAlert, register }) => {
             type="password"
             placeholder="Password"
             name="password"
-            minLength="6"
             value={password}
             onChange={handleChange}
           />
@@ -76,7 +80,6 @@ const Register = ({ setAlert, register }) => {
             type="password"
             placeholder="Confirm Password"
             name="password2"
-            minLength="6"
             value={password2}
             onChange={handleChange}
           />
@@ -84,7 +87,7 @@ const Register = ({ setAlert, register }) => {
         <input type="submit" className="btn btn-primary" value="Register" />
       </form>
       <p className="my-1">
-        Already have an account? <a href="login.html">Sign In</a>
+        Already have an account? <Link to="/login">Sign In</Link>
       </p>
     </section>
   );
@@ -93,6 +96,11 @@ const Register = ({ setAlert, register }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
-export default connect(null, { setAlert, register })(Register);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, register })(Register);
