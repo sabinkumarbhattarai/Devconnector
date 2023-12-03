@@ -92,3 +92,11 @@ export const login =
       });
     }
   };
+
+//logout
+
+export const logout = () => (dispatch) => {
+  dispatch({
+    type: AUTH_TYPES.LOGOUT,
+  });
+};

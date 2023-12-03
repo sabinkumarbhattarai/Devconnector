@@ -30,6 +30,7 @@ export const authReducer = (state = initialState, action) => {
     case AUTH_TYPES.REGISTER_FAIL:
     case AUTH_TYPES.AUTH_ERROR:
     case AUTH_TYPES.LOGIN_FAILURE:
+    case AUTH_TYPES.LOGOUT:
       localStorage.removeItem("token");
       return {
         ...state,
