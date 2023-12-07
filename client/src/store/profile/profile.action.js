@@ -2,12 +2,13 @@ import axios from "axios";
 
 import { setAlert } from "../alert/alert.action";
 import { PROFILE_TYPES } from "./profile.types";
+import { Navigate } from "react-router-dom";
 
 //Get current users profile
 
 export const getCurrentProfile = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/profile/me");
+    const res = await axios.get("api/profile/me");
     dispatch({
       type: PROFILE_TYPES.GET_PROFILE,
       payload: res.data,
@@ -26,16 +27,18 @@ export const getCurrentProfile = () => async (dispatch) => {
 //create or update profile
 
 export const createProfile =
-  (formData, history, edit = false) =>
+  (formData, edit = false) =>
   async (dispatch) => {
-    try {
-      const config = {
-        header: {
-          "Content-Type": "application/json",
-        },
-      };
 
-      const res = await axios.post("/api/profile", formData, config);
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+   
+    try {
+      
+      const res = await axios.post("api/profile", formData, config);
       dispatch({
         type: PROFILE_TYPES.GET_PROFILE,
         payload: res.data,
@@ -43,7 +46,7 @@ export const createProfile =
 
       dispatch(setAlert(edit ? "Profile updated" : "Profile Created"));
       if (!edit) {
-        history.push("/dashboard");
+        return <Navigate tp="/dashboard" />;
       }
     } catch (err) {
       const errors = err.response.data.errors;

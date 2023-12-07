@@ -41,7 +41,7 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array });
+      return res.status(400).json({ errors: errors.array() });
     }
     const {
       company,
@@ -270,7 +270,7 @@ router.put(
 
 router.delete("/education/:edu_id", auth, async (req, res) => {
   try {
-    console.log('I am here')
+    console.log("I am here");
     const profile = await Profile.findOne({ user: req.user.id });
     //get remove index
     const removeIndex = profile.education

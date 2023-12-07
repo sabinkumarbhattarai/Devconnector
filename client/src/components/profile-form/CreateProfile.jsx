@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { createProfile } from "../../store/profile/profile.action";
 
-const CreateProfile = ({ createProfile, history }) => {
-  const navigate = useNavigate();
+const CreateProfile = ({ createProfile }) => {
+  
 
   const [formData, setFormData] = useState({
     company: "",
     website: "",
     location: "",
     status: "",
-    skills: "",
+    skills:"",
     githubusername: "",
     bio: "",
     twitter: "",
@@ -41,13 +41,18 @@ const CreateProfile = ({ createProfile, history }) => {
   } = formData;
 
   const handleFormChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: [event.target.value] });
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+    
   };
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createProfile(formData,navigate);
+    createProfile(formData);
+   
   };
+
+
 
   return (
     <section className="container">
@@ -196,7 +201,7 @@ const CreateProfile = ({ createProfile, history }) => {
               <input
                 type="text"
                 placeholder="Linkedin URL"
-                name="linkedin"
+                name="linkedlin"
                 value={linkedlin}
                 onChange={handleFormChange}
               />
